@@ -243,8 +243,16 @@ func (st *StateTransition) buyGas(isHospital bool) error {  // 수정 (매개변
 	mgval = mgval.Mul(mgval, st.msg.GasPrice)
 	balanceCheck := new(big.Int).Set(mgval)
 	if st.msg.GasFeeCap != nil {
-		balanceCheck.SetUint64(st.msg.GasLimit)
-		balanceCheck = balanceCheck.Mul(balanceCheck, st.msg.GasFeeCap)
+		// 수정 (전체 추가) 시작
+		if(isHospital){ // 병원일 경우 가스비 계산 후 금액과 같이 확인
+			balanceCheck.SetUint64(st.msg.GasLimit)
+			balanceCheck = balanceCheck.Mul(balanceCheck, st.msg.GasFeeCap)
+		}else{
+			balanceCheck.SetUint64(0)
+		}
+		// 수정 (전체 추가) 종료
+		// balanceCheck.SetUint64(st.msg.GasLimit) // 수정 (주석)
+		// balanceCheck = balanceCheck.Mul(balanceCheck, st.msg.GasFeeCap) // 수정 (주석)
 		balanceCheck.Add(balanceCheck, st.msg.Value)
 	}
 	if st.evm.ChainConfig().IsCancun(st.evm.Context.BlockNumber, st.evm.Context.Time) {
@@ -553,9 +561,11 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 	gasRefund := st.refundGas(isHospital) // 수정 (추가)
 
 	effectiveTip := msg.GasPrice
-	if rules.IsLondon {
-		effectiveTip = cmath.BigMin(msg.GasTipCap, new(big.Int).Sub(msg.GasFeeCap, st.evm.Context.BaseFee))
-	}
+	// 수정 (전체 주석) 시작
+	// if rules.IsLondon {
+	// 	effectiveTip = cmath.BigMin(msg.GasTipCap, new(big.Int).Sub(msg.GasFeeCap, st.evm.Context.BaseFee))
+	// }
+	// 수정 (전체 주석) 끝
 	effectiveTipU256, _ := uint256.FromBig(effectiveTip)
 
 	if st.evm.Config.NoBaseFee && msg.GasFeeCap.Sign() == 0 && msg.GasTipCap.Sign() == 0 {
