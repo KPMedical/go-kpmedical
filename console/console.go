@@ -326,7 +326,7 @@ func (c *Console) Welcome() {
 	if res, err := c.jsre.Run(`
 		var nodeName = web3.version.node;
 		nodeName = "Kpm" + nodeName.substring(4);
-		var message = "instance: " + web3.version.node + "\n";
+		var message = "instance: " + nodeName + "\n";
 		try {
 			message += "coinbase: " + eth.coinbase + "\n";
 		} catch (err) {}
