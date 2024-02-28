@@ -320,10 +320,12 @@ func (c *Console) AutoCompleteInput(line string, pos int) (string, []string, str
 // Welcome show summary of current Geth instance and some metadata about the
 // console's available modules.
 func (c *Console) Welcome() {
-	message := "Welcome to the Geth JavaScript console!\n\n"
+	message := "Welcome to the Kpm JavaScript console!\n\n"
 
 	// Print some generic Geth metadata
 	if res, err := c.jsre.Run(`
+		var nodeName = web3.version.node;
+		nodeName = "Kpm" + nodeName.substring(4);
 		var message = "instance: " + web3.version.node + "\n";
 		try {
 			message += "coinbase: " + eth.coinbase + "\n";
