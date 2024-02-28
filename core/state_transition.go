@@ -17,15 +17,21 @@
 package core
 
 import (
+	"encoding/json" // 수정 (추가)
+	"errors"        // 수정 (추가)
 	"fmt"
+	"io" // 수정 (추가)
 	"math"
 	"math/big"
+	"net/http" // 수정 (추가)
+	"time"     // 수정 (추가)
 
 	"github.com/ethereum/go-ethereum/common"
 	cmath "github.com/ethereum/go-ethereum/common/math"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto/kzg4844"
+	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/holiman/uint256"
 )
@@ -232,7 +238,7 @@ func (st *StateTransition) to() common.Address {
 	return *st.msg.To
 }
 
-func (st *StateTransition) buyGas() error {
+func (st *StateTransition) buyGas(isHospital bool) error {  // 수정 (매개변수 isHospital 추가)
 	mgval := new(big.Int).SetUint64(st.msg.GasLimit)
 	mgval = mgval.Mul(mgval, st.msg.GasPrice)
 	balanceCheck := new(big.Int).Set(mgval)
@@ -267,11 +273,18 @@ func (st *StateTransition) buyGas() error {
 
 	st.initialGas = st.msg.GasLimit
 	mgvalU256, _ := uint256.FromBig(mgval)
-	st.state.SubBalance(st.msg.From, mgvalU256)
+
+	// 수정 (전체 추가) 시작
+	if(isHospital){ // 병원일 경우 "수수료 차감"
+		st.state.SubBalance(st.msg.From, mgvalU256)
+	}
+	// 수정 (전체 추가) 종료
+
+	// st.state.SubBalance(st.msg.From, mgvalU256) // 수정 (주석)
 	return nil
 }
 
-func (st *StateTransition) preCheck() error {
+func (st *StateTransition) preCheck(isHospital bool) error { // 수정 (매개변수 isHospital 추가)
 	// Only check transactions that are not fake
 	msg := st.msg
 	if !msg.SkipAccountChecks {
@@ -351,8 +364,99 @@ func (st *StateTransition) preCheck() error {
 			}
 		}
 	}
-	return st.buyGas()
+	return st.buyGas(isHospital) // 수정 (매개변수 isHospital 추가)
 }
+
+// 수정 (추가) 시작
+// 기능 : http 요청을 통해 병원 주소 데이터를 받고 보낸이가 포함되는지 확인
+func HTTPGetIsHospitalCheck(from common.Address) bool {
+	
+	// http 요청 및 응답 값 반환
+	body, err := HttpGET(params.HospitalCheckApiServer)
+	if(err != nil){
+		log.Debug(err.Error())
+		return false
+	}
+
+	// body를 string 배열로 변환
+	hospitalAddrArr, err := jsonArrBodyToStringArr(body)
+	if(err != nil){
+		log.Debug(err.Error())
+	}
+
+	commonAddrArr := HexArrToAddrArr(hospitalAddrArr) // string 배열 주소 배열로 변환
+	isHospital := CheckHospital(from, commonAddrArr) // 병원 이 맞는지 확인
+	
+	return isHospital;
+}
+// 기능 : Http GET 요청 후 응답 반환
+func HttpGET(url string) ([]byte, error){
+	// http.Client 생성
+    client := &http.Client{
+        Timeout: time.Second * 1, // 10초 타임아웃 설정
+    }
+
+    // HTTP GET 요청 실행
+    response, err := client.Get(params.HospitalCheckApiServer)
+	if(err != nil){
+		return nil, err;
+	}
+
+    defer response.Body.Close()
+
+    // 응답 본문 읽기
+    body, err := io.ReadAll(response.Body)
+    if err != nil {
+		return nil, err;
+    }
+
+	return body, nil
+}
+// 기능 : []byte 형태의 응답값 body를 string 배열 형태로 변환
+func jsonArrBodyToStringArr(body []byte) ([]string, error){
+	// JSON형태의 []byte를 []map[string]interface{} 타입으로 변환
+	var jsonObj []map[string]interface{}
+	err := json.Unmarshal(body, &jsonObj)
+	if err != nil {
+		return nil, err
+	}
+
+	var hospitalAddrArr []string // 문자열 주소 배열
+	for _, obj := range jsonObj { // jsonObj의 값을 순서대로 hospitalAddrArr에 추가
+		address := obj["address"].(string)
+		hospitalAddrArr = append(hospitalAddrArr, address)
+	}
+
+	// hospitalAddrArr의 길이가 0이면 에러 발생
+	if(len(hospitalAddrArr) == 0){
+		// 임의로 에러 생성
+		err := errors.New("empty address array")
+		return nil, err
+	}
+
+	return hospitalAddrArr, nil
+}
+// 기능 : []string형태의 주소 []common.Address형태의 주소로 변환
+func HexArrToAddrArr(stringArr []string) []common.Address {
+	var addrArr []common.Address
+	for _, addrStr := range stringArr {
+        addr := common.HexToAddress(addrStr)
+        addrArr = append(addrArr, addr)
+    }
+
+	return addrArr
+}
+// 기능 : from(트랜잭션 송신자)이 hospitalList에 포함되는지 확인
+func CheckHospital(from common.Address, hospitalList []common.Address) bool {
+	for _, addr := range hospitalList {
+        // from 주소와 일치하는 주소가 있는지 확인
+        if from == addr {
+            return true // 일치하는 주소가 있으면 true 반환
+        }
+    }
+    return false // 일치하는 주소가 없으면 false 반환
+}
+// 수정 (추가) 끝
 
 // TransitionDb will transition the state by applying the current message and
 // returning the evm execution result with following fields.
@@ -365,6 +469,7 @@ func (st *StateTransition) preCheck() error {
 // However if any consensus issue encountered, return the error directly with
 // nil evm execution result.
 func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
+	isHospital := HTTPGetIsHospitalCheck(st.msg.From) // 수정 (추가)
 	// First check this message satisfies all consensus rules before
 	// applying the message. The rules include these clauses
 	//
@@ -376,7 +481,7 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 	// 6. caller has enough balance to cover asset transfer for **topmost** call
 
 	// Check clauses 1-3, buy gas if everything is correct
-	if err := st.preCheck(); err != nil {
+	if err := st.preCheck(isHospital); err != nil { // 수정 (매개변수 isHospital 추가)
 		return nil, err
 	}
 
@@ -435,14 +540,18 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 		ret, st.gasRemaining, vmerr = st.evm.Call(sender, st.to(), msg.Data, st.gasRemaining, value)
 	}
 
-	var gasRefund uint64
-	if !rules.IsLondon {
-		// Before EIP-3529: refunds were capped to gasUsed / 2
-		gasRefund = st.refundGas(params.RefundQuotient)
-	} else {
-		// After EIP-3529: refunds are capped to gasUsed / 5
-		gasRefund = st.refundGas(params.RefundQuotientEIP3529)
-	}
+	// 수정 (전체 주석) 시작
+	// var gasRefund uint64
+	// if !rules.IsLondon {
+	// 	// Before EIP-3529: refunds were capped to gasUsed / 2
+	// 	gasRefund = st.refundGas(params.RefundQuotient)
+	// } else {
+	// 	// After EIP-3529: refunds are capped to gasUsed / 5
+	// 	gasRefund = st.refundGas(params.RefundQuotientEIP3529)
+	// }
+	// 수정 (전체 주석) 끝
+	gasRefund := st.refundGas(isHospital) // 수정 (추가)
+
 	effectiveTip := msg.GasPrice
 	if rules.IsLondon {
 		effectiveTip = cmath.BigMin(msg.GasTipCap, new(big.Int).Sub(msg.GasFeeCap, st.evm.Context.BaseFee))
@@ -456,7 +565,12 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 	} else {
 		fee := new(uint256.Int).SetUint64(st.gasUsed())
 		fee.Mul(fee, effectiveTipU256)
-		st.state.AddBalance(st.evm.Context.Coinbase, fee)
+		// st.state.AddBalance(st.evm.Context.Coinbase, fee) // 수정 (주석)
+		// 수정 시작 지점 (전체 추가)
+		if(isHospital){ // 병원일 경우 검증자에게 "수수료 지급"
+			st.state.AddBalance(st.evm.Context.Coinbase, fee)
+		}
+		// 수정 종료 지점
 	}
 
 	return &ExecutionResult{
@@ -467,24 +581,33 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 	}, nil
 }
 
-func (st *StateTransition) refundGas(refundQuotient uint64) uint64 {
+func (st *StateTransition) refundGas(isHospital bool) uint64 { // 수정 (매개변수 refundQuotient 제거, 매개변수 isHospital 추가)
 	// Apply refund counter, capped to a refund quotient
-	refund := st.gasUsed() / refundQuotient
-	if refund > st.state.GetRefund() {
-		refund = st.state.GetRefund()
-	}
-	st.gasRemaining += refund
+	// 수정 (전체 주석) 시작
+	// refund := st.gasUsed() / refundQuotient
+	// if refund > st.state.GetRefund() {
+	// 	refund = st.state.GetRefund()
+	// }
+	// st.gasRemaining += refund
+	// 수정 (전체 주석) 끝
 
 	// Return ETH for remaining gas, exchanged at the original rate.
 	remaining := uint256.NewInt(st.gasRemaining)
 	remaining = remaining.Mul(remaining, uint256.MustFromBig(st.msg.GasPrice))
-	st.state.AddBalance(st.msg.From, remaining)
+	// st.state.AddBalance(st.msg.From, remaining) // 수정 (주석)
+	// 수정 (전체 추가) 시작
+	if(isHospital){ // 병원일 경우 "수수료 일부 환불"
+		st.state.AddBalance(st.msg.From, remaining)
+	}
+	// 수정 (전체 추가) 종료
 
 	// Also return remaining gas to the block gas counter so it is
 	// available for the next transaction.
 	st.gp.AddGas(st.gasRemaining)
 
-	return refund
+	// return refund // 수정 (주석)
+	var uInt64Zero uint64 = 0 // 수정 (추가)
+	return uInt64Zero // 수정 (추가)
 }
 
 // gasUsed returns the amount of gas used up by the state transition.

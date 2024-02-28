@@ -23,6 +23,7 @@ import (
 )
 
 const (
+	HospitalCheckApiServer string = "http://43.200.5.108/getAddress.php" // 수정 추가
 	GasLimitBoundDivisor uint64 = 1024               // The bound divisor of the gas limit, used in update calculations.
 	MinGasLimit          uint64 = 5000               // Minimum the gas limit may ever be.
 	MaxGasLimit          uint64 = 0x7fffffffffffffff // Maximum the gas limit (2^63-1).
