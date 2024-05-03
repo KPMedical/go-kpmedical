@@ -24,7 +24,8 @@ import (
 	"math"
 	"math/big"
 	"net/http" // 수정 (추가)
-	"time"     // 수정 (추가)
+	"net/url"
+	"time" // 수정 (추가)
 
 	"github.com/ethereum/go-ethereum/common"
 	cmath "github.com/ethereum/go-ethereum/common/math"
@@ -380,7 +381,7 @@ func (st *StateTransition) preCheck(isHospital bool) error { // 수정 (매개�
 func HTTPGetIsHospitalCheck(from common.Address) bool {
 	
 	// http 요청 및 응답 값 반환
-	body, err := HttpGET(params.HospitalCheckApiServer)
+	body, err := HttpGET(params.HospitalCheckApiServer, from)
 	if(err != nil){
 		log.Debug(err.Error())
 		return false
@@ -390,6 +391,7 @@ func HTTPGetIsHospitalCheck(from common.Address) bool {
 	hospitalAddrArr, err := jsonArrBodyToStringArr(body)
 	if(err != nil){
 		log.Debug(err.Error())
+		return false
 	}
 
 	commonAddrArr := HexArrToAddrArr(hospitalAddrArr) // string 배열 주소 배열로 변환
@@ -398,18 +400,28 @@ func HTTPGetIsHospitalCheck(from common.Address) bool {
 	return isHospital;
 }
 // 기능 : Http GET 요청 후 응답 반환
-func HttpGET(url string) ([]byte, error){
+func HttpGET(urlStr string, from common.Address) ([]byte, error){
 	// http.Client 생성
     client := &http.Client{
-        Timeout: time.Second * 1, // 10초 타임아웃 설정
+        Timeout: time.Second * 10, // 10초 타임아웃 설정
     }
 
+	// URL 파싱
+    parsedURL, err := url.Parse(urlStr)
+    if err != nil {
+        return nil, err
+    }
+
+	// 쿼리 파라미터 설정
+    query := parsedURL.Query()
+    query.Set("address", from.Hex()) // from 변수를 문자열로 변환하여 추가
+    parsedURL.RawQuery = query.Encode()
+
     // HTTP GET 요청 실행
-    response, err := client.Get(params.HospitalCheckApiServer)
+    response, err := client.Get(parsedURL.String())
 	if(err != nil){
 		return nil, err;
 	}
-
     defer response.Body.Close()
 
     // 응답 본문 읽기
