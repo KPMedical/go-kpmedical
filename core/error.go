@@ -61,6 +61,7 @@ var (
 
 	// ErrInsufficientFundsForTransfer is returned if the transaction sender doesn't
 	// have enough funds for transfer(topmost call only).
+	// 수정 필요
 	ErrInsufficientFundsForTransfer = errors.New("insufficient funds for transfer")
 
 	// ErrMaxInitCodeSizeExceeded is returned if creation transaction provides the init code bigger
@@ -69,6 +70,7 @@ var (
 
 	// ErrInsufficientFunds is returned if the total cost of executing a transaction
 	// is higher than the balance of the user's account.
+	// 수정 필요
 	ErrInsufficientFunds = errors.New("insufficient funds for gas * price + value")
 
 	// ErrGasUintOverflow is returned when calculating gas usage.
