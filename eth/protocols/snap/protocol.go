@@ -20,9 +20,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/rlp"
 )
 
 // Constants to match up protocol versions and messages

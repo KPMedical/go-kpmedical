@@ -27,10 +27,10 @@ import (
 
 	"github.com/cockroachdb/pebble"
 	"github.com/cockroachdb/pebble/bloom"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/ethdb"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/metrics"
 )
 
 const (

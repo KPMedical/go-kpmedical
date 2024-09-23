@@ -28,12 +28,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/KPMedical/go-kpmedical/accounts"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/common/hexutil"
+	"github.com/KPMedical/go-kpmedical/common/math"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/crypto"
 )
 
 var typedDataReferenceTypeRegexp = regexp.MustCompile(`^[A-Za-z](\w*)(\[\])?$`)

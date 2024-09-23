@@ -21,11 +21,11 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/common/math"
+	"github.com/KPMedical/go-kpmedical/consensus/misc"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/params"
 )
 
 // VerifyEIP1559Header verifies some header attributes which were changed in EIP-1559,

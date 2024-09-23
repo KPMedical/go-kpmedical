@@ -25,8 +25,8 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/log"
 	"github.com/holiman/uint256"
 	"github.com/urfave/cli/v2"
 )

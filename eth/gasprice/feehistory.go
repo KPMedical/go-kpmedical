@@ -25,11 +25,11 @@ import (
 	"math/big"
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/misc/eip1559"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/consensus/misc/eip1559"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/rpc"
 	"golang.org/x/exp/slices"
 )
 

@@ -22,9 +22,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/KPMedical/go-kpmedical/accounts/keystore"
+	"github.com/KPMedical/go-kpmedical/cmd/utils"
+	"github.com/KPMedical/go-kpmedical/crypto"
 	"github.com/google/uuid"
 	"github.com/urfave/cli/v2"
 )

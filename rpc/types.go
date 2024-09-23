@@ -24,8 +24,8 @@ import (
 	"math"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/common/hexutil"
 )
 
 // API describes the set of methods offered over the RPC interface

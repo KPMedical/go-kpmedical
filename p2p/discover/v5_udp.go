@@ -28,12 +28,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover/v5wire"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/netutil"
+	"github.com/KPMedical/go-kpmedical/common/mclock"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/p2p/discover/v5wire"
+	"github.com/KPMedical/go-kpmedical/p2p/enode"
+	"github.com/KPMedical/go-kpmedical/p2p/enr"
+	"github.com/KPMedical/go-kpmedical/p2p/netutil"
 )
 
 const (

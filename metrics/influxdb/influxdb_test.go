@@ -26,8 +26,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/metrics/internal"
+	"github.com/KPMedical/go-kpmedical/metrics"
+	"github.com/KPMedical/go-kpmedical/metrics/internal"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 )
 

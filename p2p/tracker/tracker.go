@@ -22,8 +22,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/metrics"
 )
 
 const (

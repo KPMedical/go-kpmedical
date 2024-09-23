@@ -21,10 +21,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/KPMedical/go-kpmedical"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/log"
 )
 
 // WaitMined waits for tx to be mined on the blockchain.

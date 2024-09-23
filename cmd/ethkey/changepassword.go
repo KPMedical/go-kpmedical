@@ -21,8 +21,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
+	"github.com/KPMedical/go-kpmedical/accounts/keystore"
+	"github.com/KPMedical/go-kpmedical/cmd/utils"
 	"github.com/urfave/cli/v2"
 )
 

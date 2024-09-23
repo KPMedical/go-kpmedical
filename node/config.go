@@ -25,11 +25,11 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/crypto"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/p2p"
+	"github.com/KPMedical/go-kpmedical/rpc"
 )
 
 const (

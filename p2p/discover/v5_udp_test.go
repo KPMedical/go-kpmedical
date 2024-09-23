@@ -27,12 +27,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/internal/testlog"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover/v5wire"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/KPMedical/go-kpmedical/internal/testlog"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/p2p/discover/v5wire"
+	"github.com/KPMedical/go-kpmedical/p2p/enode"
+	"github.com/KPMedical/go-kpmedical/p2p/enr"
+	"github.com/KPMedical/go-kpmedical/rlp"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/slices"
 )

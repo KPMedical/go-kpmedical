@@ -19,15 +19,15 @@ package triedb
 import (
 	"errors"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/trie"
-	"github.com/ethereum/go-ethereum/trie/trienode"
-	"github.com/ethereum/go-ethereum/trie/triestate"
-	"github.com/ethereum/go-ethereum/triedb/database"
-	"github.com/ethereum/go-ethereum/triedb/hashdb"
-	"github.com/ethereum/go-ethereum/triedb/pathdb"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/ethdb"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/trie"
+	"github.com/KPMedical/go-kpmedical/trie/trienode"
+	"github.com/KPMedical/go-kpmedical/trie/triestate"
+	"github.com/KPMedical/go-kpmedical/triedb/database"
+	"github.com/KPMedical/go-kpmedical/triedb/hashdb"
+	"github.com/KPMedical/go-kpmedical/triedb/pathdb"
 )
 
 // Config defines all necessary options for database.

@@ -25,17 +25,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/KPMedical/go-kpmedical"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/consensus/ethash"
+	"github.com/KPMedical/go-kpmedical/core"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/crypto"
+	"github.com/KPMedical/go-kpmedical/eth"
+	"github.com/KPMedical/go-kpmedical/eth/ethconfig"
+	"github.com/KPMedical/go-kpmedical/node"
+	"github.com/KPMedical/go-kpmedical/params"
+	"github.com/KPMedical/go-kpmedical/rpc"
 )
 
 // Verify that Client implements the ethereum interfaces.

@@ -30,12 +30,12 @@ import (
 	"syscall"
 
 	"github.com/dop251/goja"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/internal/jsre"
-	"github.com/ethereum/go-ethereum/internal/jsre/deps"
-	"github.com/ethereum/go-ethereum/internal/web3ext"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/KPMedical/go-kpmedical/console/prompt"
+	"github.com/KPMedical/go-kpmedical/internal/jsre"
+	"github.com/KPMedical/go-kpmedical/internal/jsre/deps"
+	"github.com/KPMedical/go-kpmedical/internal/web3ext"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/rpc"
 	"github.com/mattn/go-colorable"
 	"github.com/peterh/liner"
 )

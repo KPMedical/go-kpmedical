@@ -23,8 +23,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/KPMedical/go-kpmedical/core/rawdb"
+	"github.com/KPMedical/go-kpmedical/rlp"
 )
 
 // TestExport does basic sanity checks on the export/import functionality

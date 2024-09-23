@@ -25,13 +25,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/nat"
-	"github.com/ethereum/go-ethereum/p2p/netutil"
+	"github.com/KPMedical/go-kpmedical/cmd/utils"
+	"github.com/KPMedical/go-kpmedical/crypto"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/p2p/discover"
+	"github.com/KPMedical/go-kpmedical/p2p/enode"
+	"github.com/KPMedical/go-kpmedical/p2p/nat"
+	"github.com/KPMedical/go-kpmedical/p2p/netutil"
 )
 
 func main() {

@@ -25,25 +25,26 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/ethereum/go-ethereum/internal/debug"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/node"
+	"github.com/KPMedical/go-kpmedical/accounts"
+	"github.com/KPMedical/go-kpmedical/accounts/keystore"
+	"github.com/KPMedical/go-kpmedical/cmd/utils"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/console/prompt"
+	"github.com/KPMedical/go-kpmedical/core"
+	"github.com/KPMedical/go-kpmedical/eth"
+	"github.com/KPMedical/go-kpmedical/eth/downloader"
+	"github.com/KPMedical/go-kpmedical/ethclient"
+	"github.com/KPMedical/go-kpmedical/internal/debug"
+	"github.com/KPMedical/go-kpmedical/internal/ethapi"
+	"github.com/KPMedical/go-kpmedical/internal/flags"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/metrics"
+	"github.com/KPMedical/go-kpmedical/node"
 	"go.uber.org/automaxprocs/maxprocs"
 
 	// Force-load the tracer engines to trigger registration
-	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
-	_ "github.com/ethereum/go-ethereum/eth/tracers/native"
+	_ "github.com/KPMedical/go-kpmedical/eth/tracers/js"
+	_ "github.com/KPMedical/go-kpmedical/eth/tracers/native"
 
 	"github.com/urfave/cli/v2"
 )
@@ -267,10 +268,20 @@ func init() {
 }
 
 func main() {
+	// Edited By KPH(start)
+
+	// Initialize variable & updating
+	core.InitializeHospitalSystem()
+
+	// Edited By KPH(end)
+
 	if err := app.Run(os.Args); err != nil {
 		fmt.Fprintln(os.Stderr, err)
+		core.StopCron()
 		os.Exit(1)
 	}
+
+	core.StopCron()
 }
 
 // prepare manipulates memory cache allowance and setups metric system.

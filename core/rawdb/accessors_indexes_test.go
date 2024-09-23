@@ -21,12 +21,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/internal/blocktest"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/ethdb"
+	"github.com/KPMedical/go-kpmedical/internal/blocktest"
+	"github.com/KPMedical/go-kpmedical/params"
+	"github.com/KPMedical/go-kpmedical/rlp"
 )
 
 var newTestHasher = blocktest.NewHasher

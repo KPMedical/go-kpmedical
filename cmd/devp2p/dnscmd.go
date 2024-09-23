@@ -25,11 +25,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/p2p/dnsdisc"
-	"github.com/ethereum/go-ethereum/p2p/enode"
+	"github.com/KPMedical/go-kpmedical/accounts/keystore"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/console/prompt"
+	"github.com/KPMedical/go-kpmedical/p2p/dnsdisc"
+	"github.com/KPMedical/go-kpmedical/p2p/enode"
 	"github.com/urfave/cli/v2"
 )
 

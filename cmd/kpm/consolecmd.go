@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/console"
-	"github.com/ethereum/go-ethereum/internal/flags"
+	"github.com/KPMedical/go-kpmedical/cmd/utils"
+	"github.com/KPMedical/go-kpmedical/console"
+	"github.com/KPMedical/go-kpmedical/internal/flags"
 	"github.com/urfave/cli/v2"
 )
 

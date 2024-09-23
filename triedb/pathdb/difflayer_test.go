@@ -20,10 +20,10 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/trie/testutil"
-	"github.com/ethereum/go-ethereum/trie/trienode"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/rawdb"
+	"github.com/KPMedical/go-kpmedical/trie/testutil"
+	"github.com/KPMedical/go-kpmedical/trie/trienode"
 )
 
 func emptyLayer() *diskLayer {

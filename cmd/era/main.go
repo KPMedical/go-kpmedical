@@ -26,13 +26,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/internal/era"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/internal/era"
+	"github.com/KPMedical/go-kpmedical/internal/ethapi"
+	"github.com/KPMedical/go-kpmedical/internal/flags"
+	"github.com/KPMedical/go-kpmedical/params"
+	"github.com/KPMedical/go-kpmedical/trie"
 	"github.com/urfave/cli/v2"
 )
 

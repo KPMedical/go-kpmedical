@@ -21,16 +21,16 @@ import (
 	"fmt"
 
 	"github.com/crate-crypto/go-ipa/banderwagon"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/lru"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/trie"
-	"github.com/ethereum/go-ethereum/trie/trienode"
-	"github.com/ethereum/go-ethereum/trie/utils"
-	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/common/lru"
+	"github.com/KPMedical/go-kpmedical/core/rawdb"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/crypto"
+	"github.com/KPMedical/go-kpmedical/ethdb"
+	"github.com/KPMedical/go-kpmedical/trie"
+	"github.com/KPMedical/go-kpmedical/trie/trienode"
+	"github.com/KPMedical/go-kpmedical/trie/utils"
+	"github.com/KPMedical/go-kpmedical/triedb"
 )
 
 const (

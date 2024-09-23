@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/KPMedical/go-kpmedical/common/hexutil"
+	"github.com/KPMedical/go-kpmedical/crypto"
 )
 
 type bytesBacked interface {

@@ -25,11 +25,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/forkid"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/KPMedical/go-kpmedical/core"
+	"github.com/KPMedical/go-kpmedical/core/forkid"
+	"github.com/KPMedical/go-kpmedical/p2p/enr"
+	"github.com/KPMedical/go-kpmedical/params"
+	"github.com/KPMedical/go-kpmedical/rlp"
 	"github.com/urfave/cli/v2"
 )
 

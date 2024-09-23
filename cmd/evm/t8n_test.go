@@ -24,9 +24,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/cmd/evm/internal/t8ntool"
-	"github.com/ethereum/go-ethereum/internal/cmdtest"
-	"github.com/ethereum/go-ethereum/internal/reexec"
+	"github.com/KPMedical/go-kpmedical/cmd/evm/internal/t8ntool"
+	"github.com/KPMedical/go-kpmedical/internal/cmdtest"
+	"github.com/KPMedical/go-kpmedical/internal/reexec"
 )
 
 func TestMain(m *testing.M) {

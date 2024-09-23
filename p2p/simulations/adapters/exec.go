@@ -34,12 +34,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ethereum/go-ethereum/internal/reexec"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/KPMedical/go-kpmedical/internal/reexec"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/node"
+	"github.com/KPMedical/go-kpmedical/p2p"
+	"github.com/KPMedical/go-kpmedical/p2p/enode"
+	"github.com/KPMedical/go-kpmedical/rpc"
 	"github.com/gorilla/websocket"
 	"golang.org/x/exp/slog"
 )

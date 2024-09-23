@@ -20,11 +20,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/KPMedical/go-kpmedical/accounts"
+	"github.com/KPMedical/go-kpmedical/accounts/keystore"
+	"github.com/KPMedical/go-kpmedical/cmd/utils"
+	"github.com/KPMedical/go-kpmedical/crypto"
+	"github.com/KPMedical/go-kpmedical/log"
 	"github.com/urfave/cli/v2"
 )
 

@@ -22,11 +22,11 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
-	"github.com/ethereum/go-ethereum/trie"
-	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/rawdb"
+	"github.com/KPMedical/go-kpmedical/ethdb/memorydb"
+	"github.com/KPMedical/go-kpmedical/trie"
+	"github.com/KPMedical/go-kpmedical/triedb"
 	"golang.org/x/exp/slices"
 )
 

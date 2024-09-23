@@ -24,13 +24,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/cmd/devp2p/internal/v4test"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/KPMedical/go-kpmedical/cmd/devp2p/internal/v4test"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/crypto"
+	"github.com/KPMedical/go-kpmedical/internal/flags"
+	"github.com/KPMedical/go-kpmedical/p2p/discover"
+	"github.com/KPMedical/go-kpmedical/p2p/enode"
+	"github.com/KPMedical/go-kpmedical/params"
 	"github.com/urfave/cli/v2"
 )
 

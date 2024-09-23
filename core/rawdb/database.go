@@ -26,12 +26,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/ethdb/leveldb"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
-	"github.com/ethereum/go-ethereum/ethdb/pebble"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/ethdb"
+	"github.com/KPMedical/go-kpmedical/ethdb/leveldb"
+	"github.com/KPMedical/go-kpmedical/ethdb/memorydb"
+	"github.com/KPMedical/go-kpmedical/ethdb/pebble"
+	"github.com/KPMedical/go-kpmedical/log"
 	"github.com/olekukonko/tablewriter"
 )
 

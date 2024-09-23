@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/tests"
+	"github.com/KPMedical/go-kpmedical/core/vm"
+	"github.com/KPMedical/go-kpmedical/tests"
 	"github.com/urfave/cli/v2"
 )
 

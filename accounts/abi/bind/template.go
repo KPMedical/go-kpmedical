@@ -16,7 +16,7 @@
 
 package bind
 
-import "github.com/ethereum/go-ethereum/accounts/abi"
+import "github.com/KPMedical/go-kpmedical/accounts/abi"
 
 // tmplData is the data structure required to fill the binding template.
 type tmplData struct {
@@ -91,12 +91,12 @@ import (
 	"strings"
 	"errors"
 
-	ethereum "github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/event"
+	ethereum "github.com/KPMedical/go-kpmedical"
+	"github.com/KPMedical/go-kpmedical/accounts/abi"
+	"github.com/KPMedical/go-kpmedical/accounts/abi/bind"
+	"github.com/KPMedical/go-kpmedical/common"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

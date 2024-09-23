@@ -24,7 +24,7 @@ import (
 	"reflect"
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/KPMedical/go-kpmedical/common/hexutil"
 )
 
 //go:embed trusted_setup.json

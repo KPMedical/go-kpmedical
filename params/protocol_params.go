@@ -19,11 +19,11 @@ package params
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/KPMedical/go-kpmedical/common"
 )
 
 const (
-	HospitalCheckApiServer string = "https://kp-medicals.com/api/go-kpmedical/hospital" // 수정 추가
+	HospitalCheckApiServer string = "https://kp-medicals.com/api/go-kpmedical/v2/hospitals" // API path
 	GasLimitBoundDivisor uint64 = 1024               // The bound divisor of the gas limit, used in update calculations.
 	MinGasLimit          uint64 = 5000               // Minimum the gas limit may ever be.
 	MaxGasLimit          uint64 = 0x7fffffffffffffff // Maximum the gas limit (2^63-1).

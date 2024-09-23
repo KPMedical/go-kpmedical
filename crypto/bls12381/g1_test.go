@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/KPMedical/go-kpmedical/common"
 )
 
 func (g *G1) one() *PointG1 {

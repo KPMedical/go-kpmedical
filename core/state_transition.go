@@ -27,13 +27,13 @@ import (
 	"net/url"
 	"time" // 수정 (추가)
 
-	"github.com/ethereum/go-ethereum/common"
-	cmath "github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto/kzg4844"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/KPMedical/go-kpmedical/common"
+	cmath "github.com/KPMedical/go-kpmedical/common/math"
+	"github.com/KPMedical/go-kpmedical/core/types"
+	"github.com/KPMedical/go-kpmedical/core/vm"
+	"github.com/KPMedical/go-kpmedical/crypto/kzg4844"
+	"github.com/KPMedical/go-kpmedical/log"
+	"github.com/KPMedical/go-kpmedical/params"
 	"github.com/holiman/uint256"
 )
 
@@ -239,16 +239,16 @@ func (st *StateTransition) to() common.Address {
 	return *st.msg.To
 }
 
-func (st *StateTransition) buyGas(isHospital bool) error {  // 수정 (매개변수 isHospital 추가)
+func (st *StateTransition) buyGas(isHospital bool) error { // 수정 (매개변수 isHospital 추가)
 	mgval := new(big.Int).SetUint64(st.msg.GasLimit)
 	mgval = mgval.Mul(mgval, st.msg.GasPrice)
 	balanceCheck := new(big.Int).Set(mgval)
 	if st.msg.GasFeeCap != nil {
 		// 수정 (전체 추가) 시작
-		if(isHospital){ // 병원일 경우 가스비 계산 후 금액과 같이 확인
+		if isHospital { // 병원일 경우 가스비 계산 후 금액과 같이 확인
 			balanceCheck.SetUint64(st.msg.GasLimit)
 			balanceCheck = balanceCheck.Mul(balanceCheck, st.msg.GasFeeCap)
-		}else{
+		} else {
 			balanceCheck.SetUint64(0)
 		}
 		// 수정 (전체 추가) 종료
@@ -284,7 +284,7 @@ func (st *StateTransition) buyGas(isHospital bool) error {  // 수정 (매개변
 	mgvalU256, _ := uint256.FromBig(mgval)
 
 	// 수정 (전체 추가) 시작
-	if(isHospital){ // 병원일 경우 "수수료 차감"
+	if isHospital { // 병원일 경우 "수수료 차감"
 		st.state.SubBalance(st.msg.From, mgvalU256)
 	}
 	// 수정 (전체 추가) 종료
@@ -376,64 +376,65 @@ func (st *StateTransition) preCheck(isHospital bool) error { // 수정 (매개�
 	return st.buyGas(isHospital) // 수정 (매개변수 isHospital 추가)
 }
 
-// 수정 (추가) 시작
 // 기능 : http 요청을 통해 병원 주소 데이터를 받고 보낸이가 포함되는지 확인
 func HTTPGetIsHospitalCheck(from common.Address) bool {
-	
+
 	// http 요청 및 응답 값 반환
 	body, err := HttpGET(params.HospitalCheckApiServer, from)
-	if(err != nil){
+	if err != nil {
 		log.Debug(err.Error())
 		return false
 	}
 
 	// body를 string 배열로 변환
 	hospitalAddrArr, err := jsonArrBodyToStringArr(body)
-	if(err != nil){
+	if err != nil {
 		log.Debug(err.Error())
 		return false
 	}
 
 	commonAddrArr := HexArrToAddrArr(hospitalAddrArr) // string 배열 주소 배열로 변환
-	isHospital := CheckHospital(from, commonAddrArr) // 병원 이 맞는지 확인
-	
-	return isHospital;
+	isHospital := CheckHospital(from, commonAddrArr)  // 병원 이 맞는지 확인
+
+	return isHospital
 }
+
 // 기능 : Http GET 요청 후 응답 반환
-func HttpGET(urlStr string, from common.Address) ([]byte, error){
+func HttpGET(urlStr string, from common.Address) ([]byte, error) {
 	// http.Client 생성
-    client := &http.Client{
-        Timeout: time.Second * 10, // 10초 타임아웃 설정
-    }
+	client := &http.Client{
+		Timeout: time.Second * 10, // 10초 타임아웃 설정
+	}
 
 	// URL 파싱
-    parsedURL, err := url.Parse(urlStr)
-    if err != nil {
-        return nil, err
-    }
+	parsedURL, err := url.Parse(urlStr)
+	if err != nil {
+		return nil, err
+	}
 
 	// 쿼리 파라미터 설정
-    query := parsedURL.Query()
-    query.Set("address", from.Hex()) // from 변수를 문자열로 변환하여 추가
-    parsedURL.RawQuery = query.Encode()
+	query := parsedURL.Query()
+	query.Set("address", from.Hex()) // from 변수를 문자열로 변환하여 추가
+	parsedURL.RawQuery = query.Encode()
 
-    // HTTP GET 요청 실행
-    response, err := client.Get(parsedURL.String())
-	if(err != nil){
-		return nil, err;
+	// HTTP GET 요청 실행
+	response, err := client.Get(parsedURL.String())
+	if err != nil {
+		return nil, err
 	}
-    defer response.Body.Close()
+	defer response.Body.Close()
 
-    // 응답 본문 읽기
-    body, err := io.ReadAll(response.Body)
-    if err != nil {
-		return nil, err;
-    }
+	// 응답 본문 읽기
+	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		return nil, err
+	}
 
 	return body, nil
 }
+
 // 기능 : []byte 형태의 응답값 body를 string 배열 형태로 변환
-func jsonArrBodyToStringArr(body []byte) ([]string, error){
+func jsonArrBodyToStringArr(body []byte) ([]string, error) {
 	// JSON형태의 []byte를 []map[string]interface{} 타입으로 변환
 	var jsonObj []map[string]interface{}
 	err := json.Unmarshal(body, &jsonObj)
@@ -441,14 +442,14 @@ func jsonArrBodyToStringArr(body []byte) ([]string, error){
 		return nil, err
 	}
 
-	var hospitalAddrArr []string // 문자열 주소 배열
+	var hospitalAddrArr []string  // 문자열 주소 배열
 	for _, obj := range jsonObj { // jsonObj의 값을 순서대로 hospitalAddrArr에 추가
 		address := obj["address"].(string)
 		hospitalAddrArr = append(hospitalAddrArr, address)
 	}
 
 	// hospitalAddrArr의 길이가 0이면 에러 발생
-	if(len(hospitalAddrArr) == 0){
+	if len(hospitalAddrArr) == 0 {
 		// 임의로 에러 생성
 		err := errors.New("empty address array")
 		return nil, err
@@ -456,26 +457,29 @@ func jsonArrBodyToStringArr(body []byte) ([]string, error){
 
 	return hospitalAddrArr, nil
 }
+
 // 기능 : []string형태의 주소 []common.Address형태의 주소로 변환
 func HexArrToAddrArr(stringArr []string) []common.Address {
 	var addrArr []common.Address
 	for _, addrStr := range stringArr {
-        addr := common.HexToAddress(addrStr)
-        addrArr = append(addrArr, addr)
-    }
+		addr := common.HexToAddress(addrStr)
+		addrArr = append(addrArr, addr)
+	}
 
 	return addrArr
 }
+
 // 기능 : from(트랜잭션 송신자)이 hospitalList에 포함되는지 확인
 func CheckHospital(from common.Address, hospitalList []common.Address) bool {
 	for _, addr := range hospitalList {
-        // from 주소와 일치하는 주소가 있는지 확인
-        if from == addr {
-            return true // 일치하는 주소가 있으면 true 반환
-        }
-    }
-    return false // 일치하는 주소가 없으면 false 반환
+		// from 주소와 일치하는 주소가 있는지 확인
+		if from == addr {
+			return true // 일치하는 주소가 있으면 true 반환
+		}
+	}
+	return false // 일치하는 주소가 없으면 false 반환
 }
+
 // 수정 (추가) 끝
 
 // TransitionDb will transition the state by applying the current message and
@@ -489,7 +493,8 @@ func CheckHospital(from common.Address, hospitalList []common.Address) bool {
 // However if any consensus issue encountered, return the error directly with
 // nil evm execution result.
 func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
-	isHospital := HTTPGetIsHospitalCheck(st.msg.From) // 수정 (추가)
+	// isHospital := HTTPGetIsHospitalCheck(st.msg.From) // 수정 (추가)
+	isHospital := getIsHospital(st.msg.From)
 	// First check this message satisfies all consensus rules before
 	// applying the message. The rules include these clauses
 	//
@@ -589,7 +594,7 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 		fee.Mul(fee, effectiveTipU256)
 		// st.state.AddBalance(st.evm.Context.Coinbase, fee) // 수정 (주석)
 		// 수정 시작 지점 (전체 추가)
-		if(isHospital){ // 병원일 경우 검증자에게 "수수료 지급"
+		if isHospital { // 병원일 경우 검증자에게 "수수료 지급"
 			st.state.AddBalance(st.evm.Context.Coinbase, fee)
 		}
 		// 수정 종료 지점
@@ -618,7 +623,7 @@ func (st *StateTransition) refundGas(isHospital bool) uint64 { // 수정 (매개
 	remaining = remaining.Mul(remaining, uint256.MustFromBig(st.msg.GasPrice))
 	// st.state.AddBalance(st.msg.From, remaining) // 수정 (주석)
 	// 수정 (전체 추가) 시작
-	if(isHospital){ // 병원일 경우 "수수료 일부 환불"
+	if isHospital { // 병원일 경우 "수수료 일부 환불"
 		st.state.AddBalance(st.msg.From, remaining)
 	}
 	// 수정 (전체 추가) 종료
@@ -629,7 +634,7 @@ func (st *StateTransition) refundGas(isHospital bool) uint64 { // 수정 (매개
 
 	// return refund // 수정 (주석)
 	var uInt64Zero uint64 = 0 // 수정 (추가)
-	return uInt64Zero // 수정 (추가)
+	return uInt64Zero         // 수정 (추가)
 }
 
 // gasUsed returns the amount of gas used up by the state transition.

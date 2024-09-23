@@ -29,8 +29,8 @@ import (
 	"text/template"
 	"unicode"
 
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/KPMedical/go-kpmedical/accounts/abi"
+	"github.com/KPMedical/go-kpmedical/log"
 )
 
 // Lang is a target programming language selector to generate bindings for.

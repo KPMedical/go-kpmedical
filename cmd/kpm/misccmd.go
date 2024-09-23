@@ -22,8 +22,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/internal/version"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/KPMedical/go-kpmedical/internal/version"
+	"github.com/KPMedical/go-kpmedical/params"
 	"github.com/urfave/cli/v2"
 )
 

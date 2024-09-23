@@ -19,8 +19,8 @@ package simulated
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/node"
+	"github.com/KPMedical/go-kpmedical/eth/ethconfig"
+	"github.com/KPMedical/go-kpmedical/node"
 )
 
 // WithBlockGasLimit configures the simulated backend to target a specific gas limit
