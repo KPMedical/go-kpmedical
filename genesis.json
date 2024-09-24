@@ -1,32 +1,32 @@
 {
-    "config": {
-      "chainId": 142536,
-      "homesteadBlock": 0,
-		  "eip150Block": 0,
-		  "eip155Block": 0,
-		  "eip158Block": 0,
-		  "byzantiumBlock": 0,
-		  "constantinopleBlock": 0,
-		  "petersburgBlock": 0,
-		  "istanbulBlock": 0,
-		  "muirGlacierBlock": 0,
-		  "berlinBlock": 0,
-		  "londonBlock": 0,
-		  "arrowGlacierBlock": 0,
-		  "grayGlacierBlock": 0,
-      "clique": {
-        "period": 4,
-        "epoch": 120
-      }
-    },
-    "difficulty": "1",
-    "gasLimit": "8000000",
-    "extraData": "0x000000000000000000000000000000000000000000000000000000000000000079eD7E3ce03d488C7c0388B368cFCcEFBb1e53679fe35b5d225b091de541a46ed2ae83ffc2b760abe8fee8718a49f1b5fded0637a8a8c91b3dce3009ebf70cac865b8c3ab7f0b32f26301f78dc5764d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "alloc": {
-      "79eD7E3ce03d488C7c0388B368cFCcEFBb1e5367": { "balance": "1000000000000000000000000000" },
-      "9fe35b5d225b091de541a46ed2ae83ffc2b760ab": { "balance": "1000000000000000000000000000" },
-      "e8fee8718a49f1b5fded0637a8a8c91b3dce3009": { "balance": "1000000000000000000000000000" },
-      "ebf70cac865b8c3ab7f0b32f26301f78dc5764d0": { "balance": "1000000000000000000000000000" },
-      "123463a4b065722e99115d6c222f267d9cabb524": { "balance": "10000000000000000000000" }
+  "config": {
+    "chainId": 142536,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "berlinBlock": 0,
+    "londonBlock": 0,
+    "arrowGlacierBlock": 0,
+    "grayGlacierBlock": 0,
+    "clique": {
+      "period": 5,
+      "epoch": 120
     }
+  },
+  "difficulty": "1",
+  "gasLimit": "8000000",
+  "extraData": "0x000000000000000000000000000000000000000000000000000000000000000079eD7E3ce03d488C7c0388B368cFCcEFBb1e53670000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "alloc": {
+    "79eD7E3ce03d488C7c0388B368cFCcEFBb1e5367": { "balance": "0" },
+    "9fe35b5d225b091de541a46ed2ae83ffc2b760ab": { "balance": "1000000000000000000000000000000" },
+    "e8fee8718a49f1b5fded0637a8a8c91b3dce3009": { "balance": "0" },
+    "ebf70cac865b8c3ab7f0b32f26301f78dc5764d0": { "balance": "0" },
+    "123463a4b065722e99115d6c222f267d9cabb524": { "balance": "1000000000000000" }
+  }
 }
